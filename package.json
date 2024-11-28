@@ -2,13 +2,17 @@
   "scripts": {
     "prepare": "husky",
     "pretty": "prettier --write .",
-    "lint": "eslint . --ext .js",
-    "lint:fix": "eslint . --ext .js --fix",
+    "lint": "eslint src/** etc/**",
+    "lint:fix": "eslint --fix src/** etc/**",
+    "lint-staged": "lint-staged",
     "test": "jest",
     "grapes:start": "node etc/startGrapeNetwork.js"
   },
   "lint-staged": {
-    "**/*": "eslint . --ext .js && prettier --write --ignore-unknown"
+    "**/*": [
+      "npm run lint",
+      "npm run pretty"
+    ]
   },
   "dependencies": {
     "dotenv": "^16.4.5",

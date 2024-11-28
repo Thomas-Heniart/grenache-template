@@ -14,10 +14,11 @@ class GrapeNetwork {
       this.grapes.push(
         new Grape({
           dht_port: this.dhtPorts[i],
-          dht_bootstrap: dhtBootstrap,
+          dht_bootstrap: [...dhtBootstrap],
           api_port: this.apiPorts[i],
         }),
       );
+      dhtBootstrap.push(`http://127.0.0.1:${this.dhtPorts[i]}`);
     }
   }
 
