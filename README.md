@@ -8,10 +8,10 @@ This is a template for creating a new Grenache project.
 
 Install the project easily with the following commands:
 
-```bash  
-npm i  
-cp .env.example .env  
-```  
+```bash
+npm i
+cp .env.example .env
+```
 
 ## Development Environment
 
@@ -19,16 +19,16 @@ To start a decentralized environment, run the following command:
 
 ⚠️ Ensure your `.env` file is correctly configured with **DHT_PORTS** and **API_PORTS**.
 
-```bash  
-npm run grapes:start  
-```  
+```bash
+npm run grapes:start
+```
 
 A `docker-compose` file is also provided to start development databases such as MongoDB, PostgreSQL, and Redis. Run the
 following command:
 
-```bash  
-docker compose up -d  
-```  
+```bash
+docker compose up -d
+```
 
 ## Code Style
 
@@ -40,4 +40,4 @@ If you're using IntelliJ IDEA, ESLint fixes and Prettier formatting will be appl
 
 ## License
 
-MIT  
+MIT

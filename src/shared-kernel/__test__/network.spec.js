@@ -1,9 +1,9 @@
 const { describe, it, expect } = require("@jest/globals");
-const { startGrapeNetwork } = require("./grapeNetwork");
+const { startGrapeTestNetwork } = require("./grapeTestNetwork");
 
 describe("Grape network", () => {
   it("should be able to start and stop a single node", async () => {
-    const network = await startGrapeNetwork({
+    const network = await startGrapeTestNetwork({
       dhtPorts: [20001],
       apiPorts: [30001],
     });
@@ -17,7 +17,7 @@ describe("Grape network", () => {
   });
 
   it("should be able to start and stop multiple nodes", async () => {
-    const network = await startGrapeNetwork({
+    const network = await startGrapeTestNetwork({
       dhtPorts: [20001, 20002, 20003],
       apiPorts: [30001, 30002, 30003],
     });
