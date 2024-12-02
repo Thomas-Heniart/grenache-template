@@ -1,5 +1,6 @@
 const Link = require("grenache-nodejs-link");
 const { PeerRPCServer } = require("grenache-nodejs-http");
+const { announceService } = require("../adapters/primaries/grenache/announce");
 
 const helloWorldService = async (apiUrl) => {
   const link = new Link({
@@ -16,13 +17,5 @@ const helloWorldService = async (apiUrl) => {
   await announceService("hello", link, server.port);
   return { link, server };
 };
-
-const announceService = (serviceName, link, port) =>
-  new Promise((resolve, reject) => {
-    link.announce(serviceName, port, {}, (err) => {
-      if (err) return reject(err);
-      resolve();
-    });
-  });
 
 module.exports = { helloWorldService };
