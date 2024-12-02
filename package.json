@@ -6,6 +6,7 @@
     "lint:fix": "eslint --fix src/** etc/**",
     "lint-staged": "lint-staged",
     "test": "jest",
+    "watch": "jest --watch",
     "grapes:start": "node etc/startGrapeNetwork.js"
   },
   "lint-staged": {
