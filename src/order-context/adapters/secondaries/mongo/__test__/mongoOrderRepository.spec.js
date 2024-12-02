@@ -20,6 +20,7 @@ describe("Mongo order repository", () => {
 
   beforeAll(() => {
     mongoClient = new MongoClient(process.env.MONGO_URL);
+    transactor = new MongoTransactor({ mongoClient });
   });
 
   afterAll(async () => {
@@ -28,7 +29,6 @@ describe("Mongo order repository", () => {
 
   beforeEach(async () => {
     orderRepository = new MongoOrderRepository({ mongoClient });
-    transactor = new MongoTransactor({ mongoClient });
     await mongoClient.db("order-context").collection("orders").deleteMany({});
   });
 
