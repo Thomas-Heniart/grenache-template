@@ -1,4 +1,6 @@
 const { MongoClient } = require("mongodb");
+const { MongoTransactor } = require("../adapters/secondaries/mongoTransactor");
+const { RandomIdProvider } = require("../providers/randomIdProvider");
 
 class DependencyContainer {
   constructor() {
@@ -8,6 +10,12 @@ class DependencyContainer {
 
   register(name, dependency) {
     this._dependencies[name] = dependency;
+    return this;
+  }
+
+  override(name, dependency) {
+    this._builtDependencies[name] = dependency;
+    return this;
   }
 
   async resolve(name) {
@@ -28,15 +36,24 @@ class DependencyContainer {
 
 const defaultContainer = () => {
   const container = new DependencyContainer();
-  container.register("mongo", {
-    factory: async () => {
-      //TODO replace with env variable
-      const url = "mongodb://localhost:27017";
-      const client = new MongoClient(url);
-      await client.connect();
-      return client;
-    },
-  });
+  container
+    .register("mongo", {
+      factory: async () => {
+        const url = process.env.MONGO_URL;
+        const client = new MongoClient(url);
+        await client.connect();
+        return client;
+      },
+    })
+    .register("transactor", {
+      factory: (mongo) => {
+        return new MongoTransactor({ mongoClient: mongo });
+      },
+      inject: ["mongo"],
+    })
+    .register("idProvider", {
+      factory: () => new RandomIdProvider(),
+    });
   return container;
 };
 
